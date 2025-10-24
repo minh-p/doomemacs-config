@@ -70,3 +70,5 @@
 
 (package! arduino-mode)
 (package! direnv)
+(package! nov)
+(package! org-remark)
