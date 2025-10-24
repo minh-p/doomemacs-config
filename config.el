@@ -220,3 +220,8 @@
   (add-to-list 'eglot-server-programs
                '((glsl-mode) . ("glsl_analyzer")))
   )
+
+(use-package! pdf-tools
+  :config
+  (setq pdf-annot-activate-created-annotations t)
+  )
