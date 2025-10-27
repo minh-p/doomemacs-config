@@ -250,3 +250,88 @@
          ("C-c n [" . org-remark-view-prev)
          ("C-c n r" . org-remark-remove)
          ("C-c n d" . org-remark-delete)))
+
+(add-hook 'flycheck-before-syntax-check-hook 'direnv-update-environment)
+
+(setq TeX-engine 'default)
+(setq TeX-command-default "LaTeX")
+(setq TeX-process-asynchronous t)
+(setq TeX-command-extra-options "-shell-escape")
+(setq TeX-parse-self t)
+(setq TeX-auto-save t)
+(setq TeX-source-correlate-mode t)
+
+;; ===========================
+;; Org LaTeX MLA Configuration
+;; ===========================
+(use-package! ox-latex
+  :after org
+  :config
+  ;; Define custom LaTeX class "mla"
+  (add-to-list 'org-latex-classes
+               '("mla"
+                 "\\documentclass[12pt]{article}
+\\usepackage[letterpaper]{geometry}
+\\usepackage[margin=1in]{geometry}
+\\doublespacing
+\\usepackage[style=mla]{biblatex}
+\\usepackage{setspace}
+\\usepackage{times}
+\\usepackage{sectsty}
+\\setcounter{secnumdepth}{0}
+\\allsectionsfont{\\normalsize}
+\\sectionfont{\\normalsize\\bfseries\\raggedright}        % Level 1 → bold
+\\subsectionfont{\\normalsize\\itshape\\raggedright}     % Level 2 → italics
+\\subsubsectionfont{\\normalsize\\bfseries\\raggedright} % Level 3 → bold
+\\paragraphfont{\\normalsize\\itshape\\raggedright}      % Level 4 → italics
+\\subparagraphfont{\\normalsize\\underline\\raggedright} % Level 5 → underline
+\\usepackage{indentfirst}
+\\usepackage{fancyhdr}
+\\pagestyle{fancy}
+\\fancyhead{}
+\\lhead{}
+\\chead{}
+\\rhead{\\AUTHORLAST~\\thepage}  % right header: last name + page
+\\lfoot{} \\cfoot{} \\rfoot{} % all footers empty
+\\renewcommand{\\headrulewidth}{0pt} 
+\\renewcommand{\\footrulewidth}{0pt} 
+\\setlength\\headsep{0.333in}
+\\defbibheading{bibliography}[
+  Works Cited
+]{%
+  \\begin{center}
+    \\normalfont\\normalsize Works Cited
+  \\end{center}%
+}
+\\AtBeginDocument{
+  \\noindent
+  \\AUTHOR \\\\
+  \\PROFESSOR \\\\
+  \\CLASSNAME \\\\
+  \\DATE
+}
+\\renewcommand{\\maketitle}{
+  \\\\
+  \\begin{center}
+  \\TITLE \\\\
+  \\end{center}
+  \\\\
+}"
+                 ;; Map Org levels to LaTeX sections
+                 ("\\section{%s}" . "\\section*{%s}")       ;; Level 1: bold flush left
+                 ("\\subsection{%s}" . "\\textit{%s}")     ;; Level 2: italics flush left
+                 ("\\subsubsection{%s}" . "\\underline{%s}"))) ;; Level 3: underline flush left
+
+  ;; Default to using biber for biblatex
+  (setq org-latex-pdf-process
+        '("pdflatex -interaction nonstopmode -output-directory %o %f"
+          "biber %b"
+          "pdflatex -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -interaction nonstopmode -output-directory %o %f")))
+
+;; ===========================
+;; Org-cite & BibLaTeX MLA setup
+;; ===========================
+(after! org
+  (setq org-cite-export-processors '((latex biblatex)))
+  (setq org-latex-prefer-user-labels t))
