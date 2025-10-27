@@ -273,9 +273,9 @@
                  "\\documentclass[12pt]{article}
 \\usepackage[letterpaper]{geometry}
 \\usepackage[margin=1in]{geometry}
+\\usepackage{setspace}
 \\doublespacing
 \\usepackage[style=mla]{biblatex}
-\\usepackage{setspace}
 \\usepackage{times}
 \\usepackage{sectsty}
 \\setcounter{secnumdepth}{0}
