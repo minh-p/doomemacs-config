@@ -72,3 +72,6 @@
 (package! direnv)
 (package! nov)
 (package! org-remark)
+(package! gnuplot)
+(package! gnuplot-mode)
+(package! yasnippet-snippets)

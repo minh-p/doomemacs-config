@@ -21,8 +21,8 @@
 (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 18 :weight 'medium))
 
 ;; Transparency
-(set-frame-parameter nil 'alpha-background 80)
-(add-to-list 'default-frame-alist '(alpha-background . 80))
+(set-frame-parameter nil 'alpha-background 100)
+(add-to-list 'default-frame-alist '(alpha-background . 100))
 ;;
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
@@ -38,7 +38,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-tokyo-night)
+;; (setq doom-theme 'doom-tokyo-night)
+(setq doom-theme 'levuen)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -335,3 +336,4 @@
 (after! org
   (setq org-cite-export-processors '((latex biblatex)))
   (setq org-latex-prefer-user-labels t))
+
