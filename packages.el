@@ -75,3 +75,4 @@
 (package! gnuplot)
 (package! gnuplot-mode)
 (package! yasnippet-snippets)
+(package! ob-mermaid)

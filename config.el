@@ -213,7 +213,7 @@
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '((luau-mode) . ("luau-lsp" "lsp" "--definitions=globalTypes.d.luau")))
+               '((luau-mode) . ("luau-lsp" "lsp" "--definitions=/home/hmp/.config/doom/globalTypes.d.lua")))
   (add-to-list 'eglot-server-programs
                '((c++-mode) . ("clangd" "--enable-config")))
   (add-to-list 'eglot-server-programs
@@ -337,3 +337,20 @@
   (setq org-cite-export-processors '((latex biblatex)))
   (setq org-latex-prefer-user-labels t))
 
+(use-package! ob-mermaid
+  :config
+  (setq ob-mermaid-cli-path "mmdc"))
+
+(after! org
+  ;; Enable mermaid in org-babel
+  (add-to-list 'org-babel-load-languages '(mermaid . t))
+
+  ;; Reload babel languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   org-babel-load-languages))
+
+(setq lsp-eldoc-render-all t)
+
+(setq-default tab-width 4)
+(setq-default evil-shift-width 4)
