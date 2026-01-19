@@ -39,7 +39,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-tokyo-night)
-(setq doom-theme 'doom-solarized-light)
+(setq doom-theme 'leuven)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -335,7 +335,10 @@
 ;; ===========================
 (after! org
   (setq org-cite-export-processors '((latex biblatex)))
-  (setq org-latex-prefer-user-labels t))
+  (setq org-latex-prefer-user-labels t)
+  (add-to-list 'org-file-apps '("\\.html$" . system))
+  (add-to-list 'org-file-apps '("https?" . default))
+  )
 
 (use-package! ob-mermaid
   :config
